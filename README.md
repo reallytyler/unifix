@@ -23,4 +23,11 @@ You may NOT:
 - Package into another client
 - Upload the binary publicly
 
-All rights reserved © Clouded MC.
+## 😎 Facts
+**Unifex Client is not a clone of Cloud Client**
+Rather, It is a Refined Version of It. We are aiming to innovate and Develop Cloud Client further to Compete with Other clients. Cloud Client was discontinued and some Minecraft Players including us loved the client. We will Bring this Client back from the grave and improve the following things-
+- Stability
+- Performance
+- better mods
+
+All rights reserved © 2025 Clouded MC.
