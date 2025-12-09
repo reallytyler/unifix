@@ -30,4 +30,8 @@ Rather, It is a Refined Version of It. We are aiming to innovate and Develop Clo
 - Performance
 - better mods
 
-All rights reserved © 2025 Clouded MC.
+## ✅ Download Steps
+First download the jar. Then go to your prefered launcher. And select "forge 1.8.9" or "forge optifine 1.8.9"
+After it is installed Just go to mods folder and paste the Jar. Done! enjoy your new 1.8.9 pvp experience
+
+## All rights reserved © 2025 Clouded MC.
