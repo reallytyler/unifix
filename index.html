@@ -7,240 +7,255 @@
 <title>Unifix Client</title>
 <meta name="description" content="Unifix Client — A modern Minecraft 1.8.9 PvP client focused on performance, stability, and clean design.">
 <meta name="theme-color" content="#50f0ff">
-<!-- Favicons -->
-<link rel="apple-touch-icon" sizes="180x180" href="https://cloudedmc.github.io/unifix/assets/apple-touch-icon.png"> 
-<link rel="icon" type="image/png" sizes="32x32" href="https://cloudedmc.github.io/unifix/assets/favicon-32x32.png"> 
-<link rel="icon" type="image/png" sizes="16x16" href="https://cloudedmc.github.io/unifix/assets/favicon-16x16.png">
-<link rel="manifest" href="https://cloudedmc.github.io/unifix/assets/site.webmanifest">
 
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  
-<!-- Discord / OpenGraph -->
+<!-- OpenGraph / Discord -->
+<meta property="og:type" content="website">
 <meta property="og:title" content="Unifix Client">
-<meta property="og:description" content="A universal fix for Minecraft 1.8.9 PvP. Performance, stability, and modern UI.">
+<meta property="og:description" content="A universal fix for Minecraft 1.8.9 PvP. Performance, stability, modern UI.">
 <meta property="og:image" content="https://cloudedmc.github.io/unifix/assets/android-chrome-192x192.png">
 <meta property="og:url" content="https://cloudedmc.github.io/unifix/">
-<meta property="og:type" content="website">
 
 <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
 
 <style>
 :root {
-  --bg: #050508;
-  --bg-soft: #0e1020;
-  --accent: #50f0ff;
-  --accent-glow: rgba(80,240,255,.35);
-  --text: #eaeaea;
-  --muted: #b0b0b0;
-  --radius: 20px;
+  --bg:#050508;
+  --bg-soft:#0e1020;
+  --accent:#50f0ff;
+  --accent-glow:rgba(80,240,255,.35);
+  --text:#eaeaea;
+  --muted:#b0b0b0;
+  --radius:22px;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'SF Pro Display', sans-serif;
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'SF Pro Display',sans-serif;}
+body{
+  background:radial-gradient(circle at top,#12142a,var(--bg));
+  color:var(--text);
+  overflow-x:hidden;
 }
+a{text-decoration:none;color:inherit}
 
-body {
-  background: radial-gradient(circle at top, #12142a, var(--bg));
-  color: var(--text);
-  overflow-x: hidden;
+/* LOADER */
+.loader-wrapper{
+  position:fixed;inset:0;
+  background:#050508;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  transition:.6s ease;
 }
-
-a { text-decoration: none; color: inherit; }
+.loader-wrapper.fade-out{
+  opacity:0;
+  pointer-events:none;
+}
+.loader img{
+  width:80px;
+  animation:pulse 1.6s infinite;
+}
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.12)}
+  100%{transform:scale(1)}
+}
 
 /* HEADER */
-header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  padding: 18px 60px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(5,5,10,.7);
-  backdrop-filter: blur(10px);
-  z-index: 1000;
+header{
+  position:fixed;
+  top:0;
+  width:100%;
+  padding:18px 60px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(5,5,10,.75);
+  backdrop-filter:blur(10px);
+  z-index:1000;
 }
-
-header h1 {
-  color: var(--accent);
-  font-size: 1.6rem;
+header h1{
+  color:var(--accent);
+  font-size:1.6rem;
 }
-
-nav a {
-  margin-left: 25px;
-  font-weight: 500;
-  color: var(--muted);
-  transition: .3s;
+.nav-links{
+  display:flex;
+  gap:26px;
 }
-
-nav a:hover {
-  color: var(--accent);
+.nav-links a{
+  color:var(--muted);
+  transition:.3s;
 }
+.nav-links a:hover{color:var(--accent);}
 
 /* HERO */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 0 20px;
+.hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:0 20px;
 }
-
-.hero h2 {
-  font-size: clamp(2.8rem, 5vw, 4rem);
-  color: var(--accent);
-  margin-bottom: 20px;
+.hero h2{
+  font-size:clamp(2.8rem,5vw,4rem);
+  color:var(--accent);
 }
-
-.hero p {
-  max-width: 700px;
-  color: var(--muted);
-  font-size: 1.1rem;
-  line-height: 1.6;
+.hero p{
+  max-width:700px;
+  margin-top:18px;
+  color:var(--muted);
+  line-height:1.6;
 }
-
-.hero .buttons {
-  margin-top: 40px;
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
+.buttons{
+  margin-top:40px;
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
 }
-
-.btn {
-  padding: 15px 36px;
-  border-radius: 40px;
-  font-weight: 600;
-  background: var(--accent);
-  color: #000;
-  box-shadow: 0 0 30px var(--accent-glow);
-  transition: .3s;
+.btn{
+  padding:15px 38px;
+  border-radius:40px;
+  font-weight:600;
+  background:var(--accent);
+  color:#000;
+  box-shadow:0 0 30px var(--accent-glow);
+  transition:.3s;
 }
-
-.btn.secondary {
-  background: transparent;
-  color: var(--accent);
-  border: 1px solid var(--accent);
+.btn.secondary{
+  background:transparent;
+  border:1px solid var(--accent);
+  color:var(--accent);
 }
-
-.btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0 45px var(--accent);
+.btn:hover{
+  transform:translateY(-4px);
+  box-shadow:0 0 45px var(--accent);
 }
 
 /* SECTIONS */
-section {
-  padding: 120px 8%;
+section{
+  padding:120px 8%;
 }
 
 /* FEATURES */
-.features {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
-  gap: 30px;
+.features{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
 }
-
-.card {
-  background: linear-gradient(145deg, #0e1025, #080812);
-  border-radius: var(--radius);
-  padding: 30px;
-  transition: .4s;
-  border: 1px solid rgba(255,255,255,.05);
+.card{
+  background:linear-gradient(145deg,#0e1025,#080812);
+  border-radius:var(--radius);
+  padding:32px;
+  border:1px solid rgba(255,255,255,.05);
+  opacity:0;
+  transform:translateY(30px);
+  transition:.6s ease;
 }
-
-.card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 60px rgba(0,0,0,.6);
+.card.visible{
+  opacity:1;
+  transform:none;
 }
-
-.card h3 {
-  color: var(--accent);
-  margin-bottom: 12px;
-}
-
-.card p {
-  color: var(--muted);
-  line-height: 1.6;
-}
+.card h3{color:var(--accent);margin-bottom:12px;}
+.card p{color:var(--muted);line-height:1.6;}
 
 /* GALLERY */
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-  gap: 25px;
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:26px;
 }
-
-.gallery-grid img {
-  width: 100%;
-  border-radius: var(--radius);
-  transition: .4s;
+.grid-item{
+  position:relative;
+  overflow:hidden;
+  border-radius:var(--radius);
+  opacity:0;
+  transform:translateY(40px);
+  transition:.6s ease;
 }
-
-.gallery-grid img:hover {
-  transform: scale(1.05);
+.grid-item.visible{
+  opacity:1;
+  transform:none;
 }
+.grid-item img{
+  width:100%;
+  display:block;
+  transition:.4s;
+}
+.grid-item:hover img{
+  transform:scale(1.08);
+}
+.grid-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  transition:.4s;
+}
+.grid-item:hover .grid-overlay{opacity:1;}
+.grid-overlay h3{color:var(--accent);}
 
 /* FAQ */
-.faq-item {
-  background: #0d0f1f;
-  border-radius: var(--radius);
-  margin-bottom: 15px;
-  overflow: hidden;
+.faq-item{
+  background:#0d0f1f;
+  border-radius:var(--radius);
+  margin-bottom:14px;
+  overflow:hidden;
 }
-
-.faq-item button {
-  width: 100%;
-  background: none;
-  border: none;
-  color: var(--text);
-  padding: 22px;
-  font-size: 1rem;
-  text-align: left;
-  cursor: pointer;
+.faq-question{
+  width:100%;
+  background:none;
+  border:none;
+  padding:22px;
+  color:var(--text);
+  font-size:1rem;
+  cursor:pointer;
+  text-align:left;
 }
-
-.faq-item div {
-  padding: 0 22px 22px;
-  color: var(--muted);
-  display: none;
+.faq-answer{
+  padding:0 22px 22px;
+  color:var(--muted);
+  display:none;
 }
-
-.faq-item.active div {
-  display: block;
-}
+.faq-item.active .faq-answer{display:block;}
 
 /* CTA */
-.cta {
-  text-align: center;
-  background: radial-gradient(circle at center, #12142a, #050508);
-  border-radius: var(--radius);
-  padding: 100px 20px;
+.cta{
+  text-align:center;
+  background:radial-gradient(circle at center,#12142a,#050508);
+  border-radius:var(--radius);
+  padding:100px 20px;
 }
 
 /* FOOTER */
-footer {
-  text-align: center;
-  padding: 40px;
-  color: #777;
+footer{
+  text-align:center;
+  padding:40px;
+  color:#777;
 }
 </style>
 </head>
 
 <body>
 
+<div class="loader-wrapper">
+  <div class="loader">
+    <img src="https://cloudedmc.github.io/unifix/assets/android-chrome-192x192.png">
+  </div>
+</div>
+
 <header>
   <h1>Unifix</h1>
-  <nav>
-    <a href="#features">Features</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#faq">FAQ</a>
-    <a href="https://discord.gg/QFwuEbESYe">Discord</a>
+  <nav class="nav-links">
+    <a href="#features" target="_blank" rel="noopener">Features</a>
+    <a href="#gallery" target="_blank" rel="noopener">Gallery</a>
+    <a href="#faq" target="_blank" rel="noopener">FAQ</a>
+    <a href="https://discord.gg/QFwuEbESYe" target="_blank" rel="noopener">Discord</a>
   </nav>
 </header>
 
@@ -248,72 +263,89 @@ footer {
   <h2>Unifix Client</h2>
   <p>A modern Minecraft 1.8.9 PvP client focused on performance, stability, and clean UI.</p>
   <div class="buttons">
-    <a class="btn" href="download.html">Download</a>
-    <a class="btn secondary" href="https://github.com/CloudedMC/unifix">GitHub</a>
+    <a class="btn" href="#" target="_blank" rel="noopener">Download</a>
+    <a class="btn secondary" href="https://github.com/CloudedMC/unifix" target="_blank" rel="noopener">GitHub</a>
   </div>
 </section>
 
 <section id="features">
-  <h2 style="margin-bottom:40px;color:var(--accent)">Why Unifix?</h2>
+  <h2 style="color:var(--accent);margin-bottom:40px">Why Unifix?</h2>
   <div class="features">
-    <div class="card">
-      <h3>Performance First</h3>
-      <p>Optimized for FPS stability and low latency gameplay.</p>
-    </div>
-    <div class="card">
-      <h3>Modern Design</h3>
-      <p>Clean UI inspired by modern PvP clients.</p>
-    </div>
-    <div class="card">
-      <h3>Custom Modse</h3>
-      <p>Enhance gameplay with built-in mods for competitive edge and fun.</p>
-    </div>
+    <div class="card"><h3>Performance First</h3><p>Optimized for FPS stability and low latency.</p></div>
+    <div class="card"><h3>Modern Design</h3><p>Clean UI inspired by modern PvP clients.</p></div>
+    <div class="card"><h3>Open Source</h3><p>Community driven and transparent.</p></div>
   </div>
 </section>
 
 <section id="gallery">
-  <h2 style="margin-bottom:40px;color:var(--accent)">In-Game Preview</h2>
+  <h2 style="color:var(--accent);margin-bottom:40px">In-Game Preview</h2>
   <div class="gallery-grid">
-    <img src="assets/screenshot1.png">
-    <img src="assets/screenshot2.png">
-    <img src="assets/screenshot3.png">
+    <div class="grid-item">
+      <img src="assets/screenshot1.png">
+      <div class="grid-overlay"><h3>Modern UI</h3></div>
+    </div>
+    <div class="grid-item">
+      <img src="assets/screenshot2.png">
+      <div class="grid-overlay"><h3>Custom Mods</h3></div>
+    </div>
+    <div class="grid-item">
+      <img src="assets/screenshot3.png">
+      <div class="grid-overlay"><h3>Performance</h3></div>
+    </div>
   </div>
 </section>
 
 <section id="faq">
-  <h2 style="margin-bottom:40px;color:var(--accent)">FAQ</h2>
+  <h2 style="color:var(--accent);margin-bottom:40px">FAQ</h2>
 
   <div class="faq-item">
-    <button>Is Unifix safe?</button>
-    <div>Yes. Unifix is open-source and contains no malicious code.</div>
+    <button class="faq-question">Is Unifix safe?</button>
+    <div class="faq-answer">Yes. Unifix is fully open-source.</div>
   </div>
 
   <div class="faq-item">
-    <button>Will I get banned?</button>
-    <div>No unfair advantages. Always follow server rules.</div>
+    <button class="faq-question">Will I get banned?</button>
+    <div class="faq-answer">No unfair advantages are included.</div>
   </div>
 
   <div class="faq-item">
-    <button>What versions are supported?</button>
-    <div>Currently Minecraft 1.8.9.</div>
+    <button class="faq-question">Supported versions?</button>
+    <div class="faq-answer">Minecraft 1.8.9 only.</div>
   </div>
 </section>
 
 <section class="cta">
   <h2 style="color:var(--accent);margin-bottom:20px">Ready to use Unifix?</h2>
-  <a class="btn" href="https://discord.gg/QFwuEbESYe">Join our Discord</a>
+  <a class="btn" href="https://discord.gg/QFwuEbESYe" target="_blank" rel="noopener">Join our Discord</a>
 </section>
 
 <footer>
-  © 2025 Clouded MC · Unifix Client | All rights reserved.
+  © 2025 Clouded MC · Unifix Client
 </footer>
 
 <script>
-document.querySelectorAll('.faq-item button').forEach(btn=>{
-  btn.onclick=()=>btn.parentElement.classList.toggle('active')
-})
+/* Loader */
+window.addEventListener('load',()=>{
+  document.querySelector('.loader-wrapper').classList.add('fade-out');
+});
+
+/* Reveal animations */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('visible'),i*120);
+      observer.unobserve(e.target);
+    }
+  })
+},{threshold:.15});
+
+document.querySelectorAll('.card,.grid-item').forEach(el=>observer.observe(el));
+
+/* FAQ */
+document.querySelectorAll('.faq-question').forEach(btn=>{
+  btn.onclick=()=>btn.parentElement.classList.toggle('active');
+});
 </script>
 
 </body>
 </html>
-
